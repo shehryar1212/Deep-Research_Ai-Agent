@@ -16,9 +16,9 @@ Standard chatbots (like ChatGPT) often hallucinate or provide surface-level answ
 This project builds a **Virtual Research Team** where multiple AI agents collaborate in a loop. It treats the LLM not just as a text generator, but as a **reasoning engine** that orchestrates a specific workflow.
 
 ### 👥 The "Squad"
-1.  ** The Researcher:** Uses the **Tavily Search API** to scour the web for real-time, cited information.
-2.  ** The Editor (The Critic):** Evaluates the Researcher's notes for relevance and accuracy. If the data is insufficient, it **rejects** the findings and sends the Researcher back to work (Self-Correction Loop).
-3.  ** The Writer:** Compiles the approved, verified facts into a structured final report.
+1.   The Researcher: Uses the **Tavily Search API** to scour the web for real-time, cited information.
+2.   The Editor (The Critic): Evaluates the Researcher's notes for relevance and accuracy. If the data is insufficient, it **rejects** the findings and sends the Researcher back to work (Self-Correction Loop).
+3.   The Writer: Compiles the approved, verified facts into a structured final report.
 
 ---
 
@@ -35,7 +35,7 @@ graph TD
     Decision -- "❌ No (Reject)" --> Researcher
     Decision -- "✅ Yes (Approve)" --> Writer
     
-    Writer[✍️ Writer Node] --> End([Final Report])
+    Writer[ Writer Node] --> End([Final Report])
     
     style Decision fill:#f9f,stroke:#333,stroke-width:2px
     style Researcher fill:#bbf,stroke:#333
