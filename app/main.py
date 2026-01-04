@@ -5,7 +5,6 @@ from app.team_agent import team_app
 app = FastAPI(title="Deep Research Agent API")
 
 # 2. Define the Route (The URL)
-# We use 'POST' because we are sending data (the topic) to the server
 @app.post("/research", response_model=ResearchResponse)
 async def start_research(request: ResearchRequest):
     
@@ -20,7 +19,8 @@ async def start_research(request: ResearchRequest):
         status="completed"
     )
 
-# 5. Basic Health Check (Optional but good practice)
+# 5. Basic Health Check 
 @app.get("/")
 def home():
+
     return {"message": "Deep Research API is Online 🟢"}
