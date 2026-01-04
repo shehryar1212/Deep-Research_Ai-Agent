@@ -1,36 +1,42 @@
 #  Deep Research AI Agent
 
-> **An autonomous multi-agent system that iteratively researches, critiques, and writes professional reports on any topic.**
+> **An autonomous, self-correcting multi-agent system that performs deep web research, verifies facts, and writes professional reports.**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://deep-researchai-agent-xbjzswvylnjfgvqwxevky4.streamlit.app/)
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![LangGraph](https://img.shields.io/badge/AI-LangGraph-orange)
-![FastAPI](https://img.shields.io/badge/Backend-FastAPI-green)
+![Python 3.11](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![LangGraph](https://img.shields.io/badge/Orchestration-LangGraph-orange)
+![Tavily API](https://img.shields.io/badge/Search-Tavily_API-green)
 
 ---
 
-##  Overview
+##  The Problem
+Standard chatbots (like ChatGPT) often hallucinate or provide surface-level answers. They lack the ability to **"stop and check their work."**
 
-This isn't just a chatbot. It is a **Self-Correcting State Machine**.
+##  The Solution: Agentic AI
+This project builds a **Virtual Research Team** where multiple AI agents collaborate in a loop. It treats the LLM not just as a text generator, but as a **reasoning engine** that orchestrates a specific workflow.
 
-When you give this agent a topic, it spawns a virtual team of AI employees:
-1.  ** Researcher:** Uses **Tavily Search API** to scour the web for real-time facts.
-2.  ** Editor:** Reviews the findings. If the data is weak or irrelevant, it **rejects** the work and sends the Researcher back to the web (Looping Mechanism).
-3.  ** Writer:** Once the Editor approves, the Writer compiles the facts into a polished, comprehensive report.
-
-Built with **LangGraph** for state management and **Streamlit** for the frontend interface.
+### 👥 The "Squad"
+1.  ** The Researcher:** Uses the **Tavily Search API** to scour the web for real-time, cited information.
+2.  ** The Editor (The Critic):** Evaluates the Researcher's notes for relevance and accuracy. If the data is insufficient, it **rejects** the findings and sends the Researcher back to work (Self-Correction Loop).
+3.  ** The Writer:** Compiles the approved, verified facts into a structured final report.
 
 ---
 
-## ⚙️ Architecture
+## 🧠 Architecture (State Machine)
 
-The system uses a cyclical graph workflow to ensure quality control:
+The system is built using **LangGraph**, creating a cyclical graph where state is passed between nodes.
 
 ```mermaid
 graph TD
-    Start([User Request]) --> Researcher
-    Researcher[ Researcher] -->|Web Search| Editor
-    Editor[ Editor] -->|Decision| Router{Is Data Good?}
-    Router -- "❌ No (Reject)" --> Researcher
-    Router -- "✅ Yes (Approve)" --> Writer
-    Writer[ Writer] --> End([Final Report])
+    Start([User Topic]) --> Researcher
+    Researcher[ Researcher Node] -->|Web Search Results| Editor
+    Editor[ Editor Node] -->|Review & Critique| Decision{Is Data Sufficient?}
+    
+    Decision -- "❌ No (Reject)" --> Researcher
+    Decision -- "✅ Yes (Approve)" --> Writer
+    
+    Writer[✍️ Writer Node] --> End([Final Report])
+    
+    style Decision fill:#f9f,stroke:#333,stroke-width:2px
+    style Researcher fill:#bbf,stroke:#333
+    style Editor fill:#dfd,stroke:#333
