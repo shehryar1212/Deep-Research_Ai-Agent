@@ -1,4 +1,4 @@
-# 🕵️‍♂️ Deep Research AI Agent
+#  Deep Research AI Agent
 
 > **An autonomous multi-agent system that iteratively researches, critiques, and writes professional reports on any topic.**
 
@@ -9,7 +9,7 @@
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 This isn't just a chatbot. It is a **Self-Correcting State Machine**.
 
@@ -33,4 +33,4 @@ graph TD
     Editor[ Editor] -->|Decision| Router{Is Data Good?}
     Router -- "❌ No (Reject)" --> Researcher
     Router -- "✅ Yes (Approve)" --> Writer
-    Writer[✍️ Writer] --> End([Final Report])
+    Writer[ Writer] --> End([Final Report])
